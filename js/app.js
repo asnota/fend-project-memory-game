@@ -49,21 +49,6 @@ function shuffle(array) {
 document.body.onload = startGame();
 
 
-//Add event listeners to all elements with .card class in a loop
-
- for(var i = 0; i < cardsArray.length; i++){
-   cardsArray[i].addEventListener("click", displayCard);
- };
-
-//Create a function toggling the classes from .css template and store it in a variable displayCard
-
-var  displayCard = function(){
-  this.classList.toggle("open");
-  this.classList.toggle("show");
-  this.classList.toggle("disabled");
-}
-
-
 function startGame(){
   //Shuffle deck using a function above
   cards = shuffle(cardsArray);
@@ -97,6 +82,20 @@ function startGame(){
 }
 
 
+//Create a function toggling the classes from .css template and store it in a variable displayCard
+
+var  displayCard = function(){
+  this.classList.toggle("open");
+  this.classList.toggle("show");
+  this.classList.toggle("disabled");
+}
+
+//Add event listeners to all elements with .card class in a loop
+
+ for(var i = 0; i < cardsArray.length; i++){
+   cardsArray[i].addEventListener("click", displayCard);
+ };
+
 
 //Add opened cards to OpenedCards list with push() method, checking whether they math or not
 
@@ -115,10 +114,10 @@ function cardOpen(){
 
 
 function matched(){
-  openedCards[0].classList.add('match');
-  openedCards[1].classList.add('match');
-  openedCards[0].classList.remove('show', 'open');
-  openedCards[1].classList.remove('show', 'open');
+  openedCards[0].classList.add('match', 'disabled');
+  openedCards[1].classList.add('match', 'disabled');
+  openedCards[0].classList.remove('show', 'open', 'no-event');
+  openedCards[1].classList.remove('show', 'open', 'no-event');
   openedCards = [];
 }
 
@@ -127,8 +126,8 @@ function unmatched(){
   openedCards[1].classList.add('unmatched');
   disable();
   setTimeout(function(){
-    openedCards[0].classList.remove('show', 'open', 'unmatched');
-    openedCards[1].classList.remove('show', 'open', 'unmatched');
+    openedCards[0].classList.remove('show', 'open', 'no-event', 'unmatched');
+    openedCards[1].classList.remove('show', 'open', 'no-event,' 'unmatched');
     enable();
     openedCards = [];
   }, 1100);
@@ -156,6 +155,15 @@ function moveCounter(){
   moves++
   counter.innerHTML = moves;
 
+  //Start timer at first click
+  if(moves == 1){
+    second = 0;
+    minute =0;
+    hour =0;
+    startTimer();
+  }
+
+  //Set rates based on moves
   if(moves > 8 && moves < 12){
     for(i = 0; i < 3; i++){
       if(i > 1){
@@ -173,6 +181,26 @@ function moveCounter(){
   }
 }
 
+//Create start
+var second = 0;
+var minute = 0;
+var hour = 0;
+var timer = document.querySelector(".timer");
+var interval;
+function startTimer(){
+  interval = setInterval(function(){
+    timer.innerHTML = minute + "mins " + second + "secs";
+    second++;
+    if(second == 60){
+      minute++;
+      second=0;
+    }
+    if(minute == 60){
+      hour++;
+      minute = 0;
+    }
+  }, 1000);
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
