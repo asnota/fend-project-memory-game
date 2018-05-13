@@ -14,11 +14,19 @@
  let cardClassElement = document.getElementsByClassName("card");
  let cardsArray = [...cardClassElement];
 
- //Add event listeners to all elements wit .card class in a loop
+ //Add event listeners to all elements with .card class in a loop
 
  for(var i = 0; i < cardsArray.length; i++){
-   cards[i].addEventListener("click", displayCard);
+   cardsArray[i].addEventListener("click", displayCard);
  };
+
+//Create a function toggling the classes from .css template and store it in a variable displayCard
+
+var  displayCard = function(){
+  this.classList.toggle("open");
+  this.classList.toggle("show");
+  this.classList.toggle("disabled");
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -35,6 +43,18 @@ function shuffle(array) {
     return array;
 }
 
+const deck = document.querySelector(".deck");
+
+function startGame(){
+  var shuffledCards = shuffle(cardsArray);
+  for(var i = 0; i < shuffledCards.length; i++){
+    [].forEach.call(shuffledCards, function(item){
+      deck.appendChild(item);
+    });
+  }
+}
+
+window.onload = startGame();
 
 /*
  * set up the event listener for a card. If a card is clicked:
