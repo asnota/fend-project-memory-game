@@ -56,6 +56,25 @@ function startGame(){
 
 window.onload = startGame();
 
+//Add opened cards to OpenedCards list with push() method, checking whether they math or not
+
+function cardOpen(){
+  openedCards.push(this);
+  var len = openedCards.length;
+  if(len === 2){
+    moveCounter();
+    if(openedCards[0].type === openedCards[1].type){
+      matched();
+    } else {
+      unmatched();
+    }
+  }
+}
+
+function moveCounter(){
+  moves++
+  counter.innerHTML = moves;
+}
 
 function matched(){
   openedCards[0].classList.add('match');
@@ -87,6 +106,9 @@ function disable(){
 function enable(){
   Array.prototype.filter.call(cardsArray, function(cardClassElement){
     cardClassElement.classList.remove('disabled');
+    for(var i = 0; i < matchedCard.length; i++){
+      matchedCard[i].classList.add('disabled');
+    }
   });
 }
 
