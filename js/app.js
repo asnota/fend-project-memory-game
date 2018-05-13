@@ -11,8 +11,8 @@
  */
 
  //Select all elements with the class .cards
- let cardClassElement = document.getElementsByClassName("card");
- let cards = [...cardClassElement];
+ let card = document.getElementsByClassName("card");
+ let cards = [...card];
 
  //Select deck
  const deck = document.getElementById('card-deck');
@@ -51,11 +51,11 @@ document.body.onload = startGame();
 
 function startGame(){
   //Shuffle deck using a function above
-  cards = shuffle(cardsArray);
+  cards = shuffle(cards);
 
   //Clear each card from existing classes
   for(var i = 0; i < cards.length; i++){
-    deck. = "";
+    deck.innerHTML = "";
     [].forEach.call(cards, function(item){
       deck.appendChild(item);
     });
@@ -89,12 +89,6 @@ var  displayCard = function(){
   this.classList.toggle("show");
   this.classList.toggle("disabled");
 }
-
-//Add event listeners to all elements with .card class in a loop
-
- for(var i = 0; i < cardsArray.length; i++){
-   cardsArray[i].addEventListener("click", displayCard);
- };
 
 
 //Add opened cards to OpenedCards list with push() method, checking whether they math or not
@@ -135,14 +129,14 @@ function unmatched(){
 
 
 function disable(){
-  Array.prototype.filter.call(cardsArray, function(cardClassElement){
-    cardClassElement.classList.add('disabled');
+  Array.prototype.filter.call(cards, function(card){
+    card.classList.add('disabled');
   });
 }
 
 function enable(){
-  Array.prototype.filter.call(cardsArray, function(cardClassElement){
-    cardClassElement.classList.remove('disabled');
+  Array.prototype.filter.call(cards, function(card){
+    card.classList.remove('disabled');
     for(var i = 0; i < matchedCard.length; i++){
       matchedCard[i].classList.add('disabled');
     }
@@ -201,6 +195,17 @@ function startTimer(){
     }
   }, 1000);
 }
+
+
+
+//Add event listeners to all elements with .card class in a loop
+
+ for(var i = 0; i < cards.length; i++){
+   card = cards[i];
+   card.addEventListener("click", displayCard);
+   card.addEventListener("click", cardOpen);
+   card.addEventListener("click", congratulations);
+ };
 
 /*
  * set up the event listener for a card. If a card is clicked:
