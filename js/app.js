@@ -28,6 +28,10 @@
 //Select matchedCards, when the attribute will be added dynamically
  let matchedCard = document.getElementByClassName('match');
 
+ let closeicon = document.querySelector(".close");
+
+ let modal = document.getElementById("popup1")
+
  //Create an empty array for opened cards
  var openedCards = [];
 
@@ -197,6 +201,34 @@ function startTimer(){
 }
 
 
+function congratulations(){
+  if(matchedCard.lenght == 16){
+    clearInterval(interval);
+    finalTime = timer.innerHTML;
+
+    modal.classList.add("show");
+
+    var starRating = document.querySelector(".stars").innerHTML;
+
+    document.getElementById("finalMove").innerHTML = moves;
+    document.getElementById("starRating").innerHTML = starRating;
+    document.getElementById("totalTime").innerHTML = finalTime;
+
+    closeModal();
+  }
+}
+
+function closeModal(){
+  closeicon.addEventListener("click", function(e){
+    modal.classList.remove("show");
+    startGame();
+  });
+}
+
+function playAgain(){
+  modal.classList.remove("show");
+  startGame();
+}
 
 //Add event listeners to all elements with .card class in a loop
 
