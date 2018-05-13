@@ -56,6 +56,19 @@ function startGame(){
 
 window.onload = startGame();
 
+
+function disable(){
+  Array.prototype.filter.call(cardsArray, function(cardClassElement){
+    cardClassElement.classList.add('disabled');
+  });
+}
+
+function enable(){
+  Array.prototype.filter.call(cardsArray, function(cardClassElement){
+    cardClassElement.classList.remove('disabled');
+  });  
+}
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
