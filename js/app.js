@@ -10,6 +10,16 @@
  *   - add each card's HTML to the page
  */
 
+ //Select all elements with the class .cards
+ let cardClassElement = document.getElementsByClassName("card");
+ let cardsArray = [...cardClassElement];
+
+ //Add event listeners to all elements wit .card class in a loop
+
+ for(var i = 0; i < cardsArray.length; i++){
+   cards[i].addEventListener("click", displayCard);
+ };
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
