@@ -57,6 +57,27 @@ function startGame(){
 window.onload = startGame();
 
 
+function matched(){
+  openedCards[0].classList.add('match');
+  openedCards[1].classList.add('match');
+  openedCards[0].classList.remove('show', 'open');
+  openedCards[1].classList.remove('show', 'open');
+  openedCards = [];
+}
+
+function unmatched(){
+  openedCards[0].classList.add('unmatched');
+  openedCards[1].classList.add('unmatched');
+  disable();
+  setTimeout(function(){
+    openedCards[0].classList.remove('show', 'open', 'unmatched');
+    openedCards[1].classList.remove('show', 'open', 'unmatched');
+    enable();
+    openedCards = [];
+  }, 1100);
+}
+
+
 function disable(){
   Array.prototype.filter.call(cardsArray, function(cardClassElement){
     cardClassElement.classList.add('disabled');
@@ -66,7 +87,7 @@ function disable(){
 function enable(){
   Array.prototype.filter.call(cardsArray, function(cardClassElement){
     cardClassElement.classList.remove('disabled');
-  });  
+  });
 }
 
 /*
